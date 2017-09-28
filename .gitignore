@@ -1,3 +1,4 @@
 MNIST_data/
 MNIST_generated_data/
 models/
+*.pyc
