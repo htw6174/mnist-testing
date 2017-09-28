@@ -59,11 +59,6 @@ def label_images(x, sess):
 
     y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
 
-    saver = tf.train.Saver()
-    #correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
-    #accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-    saver.restore(sess, "./models/mnist.ckpt")
-
     return y_conv
 
 def test_accuracy(x, y_):
@@ -124,7 +119,11 @@ if __name__ == "__main__":
     correct_prediction = tf.equal(tf.argmax(y_classify, 1), tf.argmax(y_, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
+    saver = tf.train.Saver()
+
     sess.run(tf.global_variables_initializer())
+
+    saver.restore(sess, "./models/mnist.ckpt")
 
     for i in range(100):
         feed_dict = {y_: next_labels_batch(50)}
